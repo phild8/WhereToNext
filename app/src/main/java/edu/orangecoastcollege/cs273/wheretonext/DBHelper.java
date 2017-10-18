@@ -31,15 +31,14 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate (SQLiteDatabase database){
-
-        String createTable = "CREATE TABLE " + DATABASE_TABLE
-                + " (" + KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+        String table = "CREATE TABLE " + DATABASE_TABLE + "("
+                + KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + FIELD_NAME + " TEXT, "
                 + FIELD_POPULATION + " INTEGER, "
                 + FIELD_TUITION + " FLOAT, "
                 + FIELD_RATING + " FLOAT, "
-                + FIELD_IMAGE_NAME + " TEXT " + ")";
-
-        database.execSQL(createTable);
+                + FIELD_IMAGE_NAME + " TEXT" + ")";
+        database.execSQL(table);
     }
 
     @Override
@@ -56,18 +55,18 @@ class DBHelper extends SQLiteOpenHelper {
 
     //********** DATABASE OPERATIONS:  ADD, GETALL
 
-    public void addCollege(College college) {
+    public void addCollege(College newCollege) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(FIELD_NAME, college.getName());
-        values.put(FIELD_POPULATION, college.getPopulation());
-        values.put(FIELD_TUITION, college.getTuition());
-        values.put(FIELD_RATING, college.getRating());
-        values.put(FIELD_IMAGE_NAME, college.getImageName());
+        values.put(FIELD_NAME, newCollege.getName());
+        values.put(FIELD_POPULATION, newCollege.getPopulation());
+        values.put(FIELD_TUITION, newCollege.getTuition());
+        values.put(FIELD_RATING, newCollege.getRating());
+        values.put(FIELD_IMAGE_NAME, newCollege.getImageName());
 
         long id = db.insert(DATABASE_TABLE, null, values);
-        college.setId(id); // set college ID to match the id in SQL db
+        newCollege.setId(id); // set college ID to match the id in SQL db
 
         db.insert(DATABASE_TABLE, null, values);
         db.close();
@@ -77,15 +76,18 @@ class DBHelper extends SQLiteOpenHelper {
         ArrayList<College> collegeList = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
 
-        Cursor cursor = database.query(DATABASE_TABLE,
-                new String[]{KEY_FIELD_ID, FIELD_POPULATION, FIELD_TUITION,
-                FIELD_RATING, FIELD_IMAGE_NAME}, null, null, null, null, null);
+        Cursor cursor = database.query(
+                DATABASE_TABLE,
+                new String[]{KEY_FIELD_ID, FIELD_NAME, FIELD_POPULATION, FIELD_TUITION,
+                FIELD_RATING, FIELD_IMAGE_NAME},
+                null, null, null, null, null);
 
         if (cursor.moveToFirst()){
             do{
                 College college = new College(cursor.getInt(0), cursor.getString(1),
                         cursor.getInt(2), cursor.getDouble(3), cursor.getDouble(4),
                         cursor.getString(5));
+
                         collegeList.add(college);
             } while (cursor.moveToNext());
         }

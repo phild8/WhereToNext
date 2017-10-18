@@ -35,6 +35,14 @@ public class CollegeListActivity extends AppCompatActivity {
         //this.deleteDatabase(DBHelper.DATABASE_NAME);
         db = new DBHelper(this);
 
+        mName = (EditText) findViewById(R.id.nameEditText);
+        mPopulation = (EditText) findViewById(R.id.populationEditText);
+        mTuition = (EditText) findViewById(R.id.tuitionEditText);
+        mRating = (RatingBar) findViewById(R.id.collegeRatingBar);
+
+        collegesListView = (ListView) findViewById(R.id.collegeListView);
+
+        /**
         // TODO: Comment this section out once the colleges below have been added to the database,
         // TODO: so they are not added multiple times (prevent duplicate entries)
         db.addCollege(new College("UC Berkeley", 42082, 14068, 4.7, "ucb.png"));
@@ -42,7 +50,8 @@ public class CollegeListActivity extends AppCompatActivity {
         db.addCollege(new College("UC Los Angeles", 43301, 25308, 4.5, "ucla.png"));
         db.addCollege(new College("UC San Diego", 33735, 20212, 4.4, "ucsd.png"));
         db.addCollege(new College("CSU Fullerton", 38948, 6437, 4.5, "csuf.png"));
-        db.addCollege(new College("CSU Long Beach", 37430, 6452, 4.4, "csulb.png"));
+        db.addCollege(new College("CSU Long Beach", 37430, 6452, 4.4, "csulb.png"))
+         */
 
         // TODO:  Fill the collegesList with all Colleges from the database
         collegesList = db.getAllColleges();
@@ -51,21 +60,20 @@ public class CollegeListActivity extends AppCompatActivity {
         collegesListAdapter = new CollegeListAdapter(this, R.layout.college_list_item, collegesList);
 
         // TODO:  Set the list view to use the list adapter
-        collegesListAdapter = (new CollegeListAdapter(this, R.layout.college_list_item, collegesList));
-
-
+        collegesListView.setAdapter(collegesListAdapter);
     }
 
     public void viewCollegeDetails(View view) {
         Intent detailsIntent = new Intent(this, CollegeDetailsActivity.class);
 
+        mLayout = (LinearLayout) view;
         College selected = (College) mLayout.getTag();
 
         detailsIntent.putExtra("Name", selected.getName());
         detailsIntent.putExtra("Population", selected.getPopulation());
         detailsIntent.putExtra("Tuition", selected.getTuition());
         detailsIntent.putExtra("Rating", selected.getRating());
-        detailsIntent.putExtra("Image", selected.getImageName());
+        detailsIntent.putExtra("ImageName", selected.getImageName());
 
         startActivity(detailsIntent);
 
@@ -94,7 +102,5 @@ public class CollegeListActivity extends AppCompatActivity {
 
             collegesListAdapter.notifyDataSetChanged();
             }
-
-
     }
 }

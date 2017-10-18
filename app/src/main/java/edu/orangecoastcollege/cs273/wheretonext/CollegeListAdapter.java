@@ -27,7 +27,7 @@ public class CollegeListAdapter extends ArrayAdapter<College> {
     private List<College> mCollegesList = new ArrayList<>();
     private int mResourceId;
 
-
+    private LinearLayout mLinearLayout;
 
     /**
      * Creates a new <code>CollegeListAdapter</code> given a mContext, resource id and list of colleges.
@@ -53,6 +53,7 @@ public class CollegeListAdapter extends ArrayAdapter<College> {
     @Override
     public View getView(int pos, View convertView, ViewGroup parent)
     {
+
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(mResourceId, null);
@@ -60,27 +61,27 @@ public class CollegeListAdapter extends ArrayAdapter<College> {
         // TODO:  Write the code to correctly inflate the view (college_list_item) with
         // TODO:  all widgets filled with the appropriate College information.
 
+        mLinearLayout = (LinearLayout) view.findViewById(R.id.collegeListLinearLayout);
+
         ImageView collegeListImageView = (ImageView) view.findViewById(R.id.collegeListImageView);
-        TextView collegeListTextView = (TextView) view.findViewById(R.id.collegeListNameTextView);
+        TextView collegeListNameTextView = (TextView) view.findViewById(R.id.collegeListNameTextView);
         RatingBar collegeListRatingBar = (RatingBar) view.findViewById(R.id.collegeListRatingBar);
 
         College selectedCollege = mCollegesList.get(pos);
-        collegeListTextView.setText(selectedCollege.getName());
+        collegeListNameTextView.setText(selectedCollege.getName());
         collegeListRatingBar.setRating((float) selectedCollege.getRating());
-
-        LinearLayout ln = (LinearLayout) view.findViewById(R.id.collegeListLinearLayout);
 
         AssetManager am = mContext.getAssets();
 
         try{
             InputStream stream = am.open(selectedCollege.getImageName());
-            Drawable image =  Drawable.createFromStream(stream, selectedCollege.getImageName());
+            Drawable image = Drawable.createFromStream(stream, selectedCollege.getImageName());
             collegeListImageView.setImageDrawable(image);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        ln.setTag(mCollegesList) ;
+        mLinearLayout.setTag(selectedCollege) ;
 
         return view;
     }
