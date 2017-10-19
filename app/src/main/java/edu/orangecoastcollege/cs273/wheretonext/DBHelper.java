@@ -68,7 +68,7 @@ class DBHelper extends SQLiteOpenHelper {
         long id = db.insert(DATABASE_TABLE, null, values);
         newCollege.setId(id); // set college ID to match the id in SQL db
 
-        db.insert(DATABASE_TABLE, null, values);
+        //db.insert(DATABASE_TABLE, null, values);
         db.close();
     }
 
