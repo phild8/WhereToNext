@@ -17,52 +17,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/aqua"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:ems="10"
-            android:textSize="24sp"
             android:gravity="center_horizontal|center_vertical"
-            android:hint="@string/name" >
-            <requestFocus/>
+            android:hint="@string/name"
+            android:textSize="24sp">
+
+            <requestFocus />
         </EditText>
 
         <EditText
+            android:id="@+id/populationEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:digits="0123456789"
             android:ems="10"
             android:gravity="center_horizontal|center_vertical"
-            android:id="@+id/populationEditText"
             android:hint="@string/population_hint"
-            android:digits="0123456789"/>
+            android:inputType="number" />
 
         <EditText
+            android:id="@+id/tuitionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:digits="0123456789"
             android:ems="10"
             android:gravity="center_horizontal|center_vertical"
-            android:id="@+id/tuitionEditText"
             android:hint="@string/tuition_hint"
-            android:digits="0123456789"/>
+            android:inputType="number" />
 
         <RatingBar
+            android:id="@+id/collegeRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/collegeRatingBar"
             android:isIndicator="false" />
 
-        <Button
-            android:id="@+id/addCollegeButton"
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:onClick="addCollege" />
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/addCollegeButton"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="addCollege"
+                android:text="@string/add" />
+
+            <Button
+                android:id="@+id/clearAllButton"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="clearAllTasks"
+                android:text="CLEAR" />
+        </GridLayout>
 
     </LinearLayout>
 

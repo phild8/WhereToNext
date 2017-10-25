@@ -78,6 +78,12 @@ public class CollegeListActivity extends AppCompatActivity {
         // TODO: Implement the view college details using an Intent
     }
 
+    public void clearAllTasks(View view){
+        collegesList.clear();
+        db.deleteAllTasks();
+        collegesListAdapter.notifyDataSetChanged();
+    }
+
     public void addCollege(View view) {
 
         // TODO: Implement the code for when the user clicks on the addCollegeButton

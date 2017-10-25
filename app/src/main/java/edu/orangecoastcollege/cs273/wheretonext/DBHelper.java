@@ -53,7 +53,7 @@ class DBHelper extends SQLiteOpenHelper {
         onCreate(database);
     }
 
-    //********** DATABASE OPERATIONS:  ADD, GETALL
+    //********** DATABASE OPERATIONS:  ADD, GETALL, CLEAR
 
     public void addCollege(College newCollege) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -95,5 +95,11 @@ class DBHelper extends SQLiteOpenHelper {
         database.close();
 
         return collegeList;
+    }
+
+    public void deleteAllTasks(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
+        db.close();
     }
 }
