@@ -54,8 +54,8 @@ public class CollegeListAdapter extends ArrayAdapter<College> {
     public View getView(int pos, View convertView, ViewGroup parent)
     {
 
-        // TODO:  Write the code to correctly inflate the view (college_list_item) with
-        // TODO:  all widgets filled with the appropriate College information.
+        // Write the code to correctly inflate the view (college_list_item) with
+        // all widgets filled with the appropriate College information.
 
         final College selectedCollege = mCollegesList.get(pos);
 

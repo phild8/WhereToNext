@@ -14,8 +14,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
 
+/**
+ * The controller that display the college details. Displays the Image, name, population, tuition,
+ * and the details rating bar.
+ */
 public class CollegeDetailsActivity extends AppCompatActivity {
 
+    /**
+     * Loads the college details data to the the text views and rating bars.
+     * @param savedInstanceState Loads a saved instane if one exists.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
