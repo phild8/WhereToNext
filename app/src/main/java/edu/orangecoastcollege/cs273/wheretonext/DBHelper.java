@@ -64,7 +64,7 @@ class DBHelper extends SQLiteOpenHelper {
                           int newVersion) {
 
         // 1) Drop existing table
-        database.execSQL("DROP TABLE IF EXISTS" + DATABASE_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 
         // 2) Build (Create) a new one
         onCreate(database);
